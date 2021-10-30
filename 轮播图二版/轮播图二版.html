@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <head lang="zh">
+        <meta charset="utf-8"> 
+        <title>轮播图</title>
+        <meta name = 'keywords' content = "轮播图">
+        <meta name  = "description" content = "这是一个轮播图的网页">
+        <style type = "text/css">
+            .wrap{
+                width:800px;
+                height:450px;
+                position: relative;
+            }
+            .list{
+                width:800px;
+                height:450px;
+                list-style: none;
+                position:relative;
+                padding-left: 0px;
+
+            }
+            .item{
+                position: absolute;
+                width:100%;
+                height:100%;
+                opacity: 0;
+                transition: all.5s;
+            }
+            .item:nth-child(1){
+                background-image: "迪士尼崽崽.jpg";
+            }
+            .item:nth-child(2){
+                background-image: "迪士尼照片.jpg";
+            }
+            .item:nth-child(3){
+                background-image: "1.jpg";
+            }
+            .item:nth-child(4){
+                background-image: "2.jpg";
+            }
+            .item:nth-child(5){
+                background-image: "迪士尼城堡.jpg";
+            }
+            .btn{
+                width:50px;
+                height:100px;
+                position: absolute;
+                top:175px;
+                background-color: rgba(250,250,250,0);
+                z-index:100;
+            }
+            #former{
+                left:0px;
+            }
+            #next{
+                right:0px;
+            }
+            .item.active{
+                opacity: 1;
+                z-index: 10;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "wrap">
+            <ul class = "list">
+                <li class = "item"><img  src = "迪士尼崽崽.jpg"  width = 100%  height = 100% alt = "迪士尼崽崽"> </li>
+                <li class = "item"><img  src = "迪士尼照片.jpg"  width = 100%  height = 100% alt = "迪士尼照片"> </li>
+                <li class = "item"><img  src = "1.jpg"  width = 100%  height = 100% alt = "1"> </li>
+                <li class = "item"><img  src = "2.jpg"  width = 100%  height = 100% alt = "2"> </li>
+                <li class = "item"><img  src = "迪士尼城堡.jpg"  width = 100%  height = 100% alt = "迪士尼城堡"> </li>
+            </ul>
+            <button type = "button" class = "btn" id = "former"><</button>
+            <button type = "button" class = "btn" id = "next">&gt;</button>
+        </div>
+        <script type = "text/javascript">
+            var items = document.getElementsByClassName('item');
+            var former = document.getElementById('former');
+            var next = document.getElementById('next');
+            
+            var index = 0;
+
+            var clearActive = function(){for (var i = 0;i<items.length;i++){
+                    items[i].className = 'item';
+                }
+            }
+            var goIndex = function(){
+                clearActive();
+                items[index].className = "item active";
+            }
+            var goNext = function(){
+                if (index < 4){
+                    index++;
+                }
+                else{
+                    index = 0;
+                }
+                
+                goIndex();
+            }
+            var goBefore = function(){
+                if(index == 0){
+                    index = 4
+                }
+                else{
+                    index--;
+                }
+                goIndex();
+            }
+
+            next.addEventListener('click',function(){
+                goNext();
+            })
+            former.addEventListener('click',function(){
+                goBefore();
+            })
+        </script>
+    </body>
